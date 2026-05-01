@@ -11,6 +11,10 @@ public class Produto {
         this.preco = preco;
     }
 
+    public Produto () {
+
+    }
+
     public int getId() {
         return id;
     }
@@ -37,7 +41,7 @@ public class Produto {
 
 
     public String exibirDados() {
-        return "Id: " + getId() + "\nNome: " + getNome() + "\npreco: " + getPreco();
+        return "Id: " + getId() + "\nNome: " + getNome() + "\npreco: " + getPreco() + "\n";
     }
 
 }

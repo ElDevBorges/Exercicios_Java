@@ -10,35 +10,31 @@ public class ProdutoController {
 
     public void adicionarProduto (Produto produto) {
         if (contador == produtos.length) {
-            System.out.println("Vetor chegou ao limite");
+            System.out.println("Vetor chegou ao limite \nProduto não foi adicionado");
         } else {
             produtos[contador] = produto;
             contador++;
-            vazio = false;
+            System.out.println("Produto adicionado !");
         }
+    }
+
+    public Produto criarProduto (int id, String nome, double preco){
+        return new Produto(id, nome, preco);
     }
 
 
 
-    public void listarProdutos () {
-
-        for (int i = 0; i <= 4; i++) {
-            if (produtos[i] != null) {
-                vazio = false;
-                System.out.println("Id: = " + produtos[i].getId());
-                System.out.println("Nome: " + produtos[i].getNome());
-                System.out.println("Preço: " + produtos[i].getPreco());
-                System.out.println("");
-
-            } else {
-                vazio = true;
-            }
-
-        }
-
-        if (vazio) {
+    public void listarProdutos ( ) {
+        if (contador == 0) {
             System.out.println("Lista vazia");
+        } else {
+            for (int i = 0; i < produtos.length; i++) {
+                if (produtos[i] != null) {
+                System.out.println(produtos[i].exibirDados());
+            }
+            }
         }
+
     }
 }
 
