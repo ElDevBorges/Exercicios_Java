@@ -1,6 +1,6 @@
 package model;
 
-public class Produto {
+public class Produto implements IDesconto{
     private int id;
     private String nome;
     private double preco;
@@ -19,9 +19,7 @@ public class Produto {
         return id;
     }
 
-    public void getId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id;}
 
     public String getNome() {
         return nome;
@@ -44,4 +42,11 @@ public class Produto {
         return "Id: " + getId() + "\nNome: " + getNome() + "\npreco: " + getPreco() + "\n";
     }
 
+    @Override
+    public double calcularDesconto() {
+        double porcentagemADescontar = 0.10;
+        double desconto = getPreco() * porcentagemADescontar;
+
+        return desconto;
+    }
 }

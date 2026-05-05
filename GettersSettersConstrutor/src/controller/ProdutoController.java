@@ -1,6 +1,7 @@
 package controller;
 
 import model.Produto;
+import model.ProdutoImportado;
 
 public class ProdutoController {
     Produto [] produtos = new Produto[5];
@@ -22,6 +23,9 @@ public class ProdutoController {
         return new Produto(id, nome, preco);
     }
 
+    public ProdutoImportado criarProdutoImp (int id, String nome, double preco, double taxaImportacao){
+        return new ProdutoImportado(id, nome, preco, taxaImportacao);
+    }
 
 
     public void listarProdutos ( ) {
@@ -36,5 +40,7 @@ public class ProdutoController {
         }
 
     }
+
+
 }
 
