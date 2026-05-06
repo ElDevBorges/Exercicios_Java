@@ -1,7 +1,6 @@
 package controller;
 
 import model.Produto;
-import model.ProdutoImportado;
 
 public class ProdutoController {
     Produto [] produtos = new Produto[5];
@@ -19,13 +18,20 @@ public class ProdutoController {
         }
     }
 
-    public Produto criarProduto (int id, String nome, double preco){
-        return new Produto(id, nome, preco);
+    public boolean existsId (int id) {
+        for (int i = 0; i < produtos.length; i++) {
+            if (produtos[i] != null) {
+                if (produtos[i].getId() == id) {
+                    throw new IllegalArgumentException ("Id ja existente!");
+                }
+
+            }
+        }
+
+        return false;
     }
 
-    public ProdutoImportado criarProdutoImp (int id, String nome, double preco, double taxaImportacao){
-        return new ProdutoImportado(id, nome, preco, taxaImportacao);
-    }
+
 
 
     public void listarProdutos ( ) {

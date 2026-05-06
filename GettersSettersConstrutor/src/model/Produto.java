@@ -4,6 +4,7 @@ public class Produto implements IDesconto{
     private int id;
     private String nome;
     private double preco;
+    private double frete = 10;
 
     public Produto(int id, String nome, double preco) {
         this.id = id;
@@ -37,15 +38,22 @@ public class Produto implements IDesconto{
         this.preco = preco;
     }
 
+    public double getFrete() {
+        return frete;
+    }
+
+    public void setFrete(int frete) {
+        this.frete = frete;
+    }
 
     public String exibirDados() {
-        return "Id: " + getId() + "\nNome: " + getNome() + "\npreco: " + getPreco() + "\n";
+        return "Id: " + getId() + "\nNome: " + getNome() + "\npreco: $" + getPreco() +  "\nFrete: $" + getFrete() + "\nDesconto: $" + calcularDesconto();
     }
 
     @Override
     public double calcularDesconto() {
-        double porcentagemADescontar = 0.10;
-        double desconto = getPreco() * porcentagemADescontar;
+        double porcentagemADescontar = 10;
+        double desconto = getPreco() * porcentagemADescontar / 100;
 
         return desconto;
     }

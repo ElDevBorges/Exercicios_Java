@@ -2,6 +2,7 @@ package view;
 
 import controller.ProdutoController;
 import model.Produto;
+import model.ProdutoImportado;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -46,10 +47,13 @@ public class ProductView {
                     case 2:
                         System.out.println("==============");
                         System.out.print("Id: ");
+
                         idProduto = sc.nextInt();
+                        sc.nextLine();
+                        produtoController.existsId(idProduto);
+
                         System.out.print("Nome: ");
                         nomeProduto = sc.nextLine();
-                        sc.nextLine();
                         System.out.print("preco: ");
                         precoProduto = sc.nextDouble();
 
@@ -57,14 +61,15 @@ public class ProductView {
                             throw new IllegalArgumentException("Erro! Preço com valor negativo");
                         }
 
-                        produto = produtoController.criarProduto(idProduto, nomeProduto, precoProduto);
-                        produtoController.adicionarProduto(produto);
+                        produtoController.adicionarProduto(new Produto(idProduto, nomeProduto, precoProduto));
+
                         break;
 
                     case 3:
                         System.out.println("==============");
                         System.out.print("Id Produto Importado: ");
                         idProduto = sc.nextInt();
+                        sc.nextLine();
                         System.out.print("Nome do Produto Importado: ");
                         nomeProduto = sc.nextLine();
                         System.out.print("preco do Produto Importado: ");
@@ -73,8 +78,7 @@ public class ProductView {
                         taxaImportacao = sc.nextDouble();
 
 
-                        produto = produtoController.criarProdutoImp(idProduto, nomeProduto, precoProduto, taxaImportacao);
-                        produtoController.adicionarProduto(produto);
+                         produtoController.adicionarProduto(new ProdutoImportado (idProduto, nomeProduto, precoProduto, taxaImportacao));
                         break;
                     case 0:
                         ativo = false;
