@@ -15,4 +15,17 @@ public class ClientController {
         Cliente cliente = new Cliente(nome, email);
         clienteDAO.inserir(cliente);
     }
+
+    public void listarCliente () {
+        clienteDAO.listar();
+    }
+
+    public void atualizarCliente (String nome, String email, int id) {
+        Cliente cliente = new Cliente(nome, email, id);
+        clienteDAO.update(cliente);
+    }
+
+    public void deletarCliente (int id) {
+        clienteDAO.delete(id);
+    }
 }

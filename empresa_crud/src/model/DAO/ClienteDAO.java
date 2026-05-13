@@ -41,11 +41,52 @@ public class ClienteDAO {
                         int id = rs.getInt("id");
                         String nome = rs.getString("nome");
                         String email = rs.getString("email");
-                        System.out.println("Id: " + id + "\nNome: " + nome + "\nEmail: " + email);
+                        System.out.println("\nId: " + id + "\nNome: " + nome + "\nEmail: " + email);
                     }
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao listar" + e.getMessage());
         }
 
+    }
+
+    public void delete (int id) {
+        String sql = "DELETE FROM cliente WHERE id = ?";
+        try (
+                Connection conn = conexaoBD.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+
+        ) {
+            stmt.setInt(1, id);
+            int linhas = stmt.executeUpdate();
+
+            if (linhas > 0 ) {
+                System.out.println("Cliente excluído com sucesso");
+            } else System.out.println("Cliente não foi encontrado");
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Não foi possivel deletar!");
+        }
+
+    }
+
+    public void update (Cliente cliente) {
+        String sql = "UPDATE cliente SET nome = ?, email = ? WHERE id = ?";
+        try (
+                Connection conn = conexaoBD.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ) {
+            stmt.setString(1, cliente.getNome());
+            stmt.setString(2, cliente.getEmail());
+            stmt.setInt(3, cliente.getId());
+            int linhas = stmt.executeUpdate();
+
+            if (linhas > 0) {
+                System.out.println("Cliente atualizado com sucesso");
+            } else System.out.println("Cliente não encontrado");
+
+        } catch (SQLException e) {
+            throw new RuntimeException ("Erro ao atualizar" + e.getMessage());
+        }
     }
 }
