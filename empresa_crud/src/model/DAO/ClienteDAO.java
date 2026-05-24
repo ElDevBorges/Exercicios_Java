@@ -1,14 +1,13 @@
-package model.DAO;
+package model.dao;
 
 import com.mysql.cj.protocol.Resultset;
 import connection.ConexaoBD;
-import model.Cliente;
+import model.entity.Cliente;
 
 import java.sql.*;
 
 
 public class ClienteDAO {
-    private final ConexaoBD conexaoBD = new ConexaoBD();
 
 
 
@@ -16,7 +15,7 @@ public class ClienteDAO {
         String sql = "INSERT INTO cliente (nome, email) VALUES (?,?)";
         try (
 
-                Connection conn = conexaoBD.getConnection();
+                Connection conn = ConexaoBD.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ) {
                     stmt.setString(1, cliente.getNome());
@@ -33,7 +32,7 @@ public class ClienteDAO {
     public void listar () {
         String sql = "SELECT * FROM cliente";
         try (
-                Connection conn = conexaoBD.getConnection();
+                Connection conn = ConexaoBD.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ResultSet rs = stmt.executeQuery();
             ){
@@ -52,7 +51,7 @@ public class ClienteDAO {
     public void delete (int id) {
         String sql = "DELETE FROM cliente WHERE id = ?";
         try (
-                Connection conn = conexaoBD.getConnection();
+                Connection conn = ConexaoBD.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql);
 
         ) {
@@ -73,7 +72,7 @@ public class ClienteDAO {
     public void update (Cliente cliente) {
         String sql = "UPDATE cliente SET nome = ?, email = ? WHERE id = ?";
         try (
-                Connection conn = conexaoBD.getConnection();
+                Connection conn = ConexaoBD.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 ) {
             stmt.setString(1, cliente.getNome());

@@ -9,7 +9,7 @@ public class ConexaoBD {
     private static final String USER = "root";
     private static final String PASSWORD = "Lf19092019f-";
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         try {
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
