@@ -5,6 +5,8 @@ import connection.ConexaoBD;
 import model.entity.Cliente;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ClienteDAO {
@@ -29,21 +31,35 @@ public class ClienteDAO {
 
     }
 
-    public void listar () {
+    public List<Cliente> listar () {
         String sql = "SELECT * FROM cliente";
+        List <Cliente> lista = new ArrayList<>();
         try (
                 Connection conn = ConexaoBD.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ResultSet rs = stmt.executeQuery();
             ){
                     while (rs.next()) {
+                    	Cliente cliente = new Cliente ();
+                    	
                         int id = rs.getInt("id");
                         String nome = rs.getString("nome");
                         String email = rs.getString("email");
-                        System.out.println("\nId: " + id + "\nNome: " + nome + "\nEmail: " + email);
+           
+                        
+                        cliente.setId (id);
+                        cliente.setNome(nome);
+                        cliente.setEmail(email);
+                        
+                        lista.add(cliente);
+                        
+                        
                     }
+                    return lista;
+                    
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao listar" + e.getMessage());
+        	System.out.println(e.getMessage());
+            return lista;
         }
 
     }

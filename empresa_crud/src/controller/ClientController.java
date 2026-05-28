@@ -1,7 +1,9 @@
 package controller;
 
-import model.entity.Cliente;
+import java.util.List;
+
 import model.dao.ClienteDAO;
+import model.entity.Cliente;
 
 public class ClientController {
     private ClienteDAO clienteDAO;
@@ -16,8 +18,8 @@ public class ClientController {
         clienteDAO.inserir(cliente);
     }
 
-    public void listarCliente () {
-        clienteDAO.listar();
+    public List<Cliente> listarCliente () {
+        return clienteDAO.listar();
     }
 
     public void atualizarCliente (String nome, String email, int id) {

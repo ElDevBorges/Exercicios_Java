@@ -61,6 +61,7 @@ public class TelaLogin extends JFrame {
 	private LoginController loginController = new LoginController();
 	private String usuarioText;
 	private String senhaText;
+	static TelaCliente tl = new TelaCliente();
 	char [] senhaArray;
 
 	/**
@@ -173,8 +174,11 @@ public class TelaLogin extends JFrame {
 					SwingUtilities.invokeLater(() -> {
 						if (sucesso) {
 							JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
+							tl.setVisible(true);
+							
 						} else JOptionPane.showMessageDialog(null, "Usuário ou senha incorreto");
 					});
+					
 					
 				}).start();
 				

@@ -1,8 +1,7 @@
 package controller;
 
-import model.entity.Usuario;
-
 import model.dao.UsuarioDAO;
+import model.entity.Usuario;
 
 public class LoginController {
 	private UsuarioDAO usuarioDAO;

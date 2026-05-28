@@ -1,6 +1,4 @@
 
-
-
 import java.awt.EventQueue;
 
 import view.TelaLogin;

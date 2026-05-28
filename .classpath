@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="08.1_ExercicioEscola/src"/>
+	<classpathentry kind="src" path="calculadora/src"/>
+	<classpathentry kind="src" path="ClassesEObjetos/src"/>
+	<classpathentry kind="src" path="empresa_crud/src"/>
+	<classpathentry kind="src" path="Exemplo_Mvc_Throw/src"/>
+	<classpathentry kind="src" path="Exercicio06_TypeCast/src"/>
+	<classpathentry kind="src" path="Exercicio08_ExemploGet_e_Set/src"/>
+	<classpathentry kind="src" path="Exercicio12_heranca/src"/>
+	<classpathentry kind="src" path="Exercicio13_Polimorfismo/src"/>
+	<classpathentry kind="src" path="Exercicio14_ClassesAbstratas/src"/>
+	<classpathentry kind="src" path="Exercicio15_Interface/src"/>
+	<classpathentry kind="src" path="Exercicios_Tratamento_De_Erro/src"/>
+	<classpathentry kind="src" path="Exercicios05_TiposPrimitivos/src"/>
+	<classpathentry kind="src" path="GettersSettersConstrutor/src"/>
+	<classpathentry kind="src" path="untitled/src"/>
+	<classpathentry kind="lib" path="empresa_crud/com.jgoodies.common_1.8.1.v20240327-0800.jar"/>
+	<classpathentry kind="lib" path="empresa_crud/com.jgoodies.forms_1.9.0.v20240327-0800.jar"/>
+	<classpathentry kind="lib" path="empresa_crud/mysql-connector-j-9.7.0.jar"/>
+	<classpathentry kind="output" path="ClassesEObjetos/bin"/>
+</classpath>
