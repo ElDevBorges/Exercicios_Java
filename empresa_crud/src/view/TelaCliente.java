@@ -22,13 +22,20 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.ComponentOrientation;
+import java.awt.Rectangle;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Insets;
 
 public class TelaCliente extends JFrame {
 
 	JFrame frame;
 	private JTextField textField_Id;
-	private JTextField textField_Nome;
 	private JTextField textField_Email;
+	private JTextField textField;
+	private JPanel panel_Crud;
 
 	/**
 	 * Launch the application.
@@ -64,6 +71,8 @@ public class TelaCliente extends JFrame {
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
 		
 		JPanel panel = new JPanel();
+		panel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		panel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		panel.setPreferredSize(new Dimension(150, 30));
 		panel.setBorder(new EmptyBorder(7, 0, 0, 0));
 		frame.getContentPane().add(panel);
@@ -121,9 +130,9 @@ public class TelaCliente extends JFrame {
 		rigidArea_1.setMaximumSize(new Dimension(19, 20));
 		panel_Cliente.add(rigidArea_1);
 		
-		textField_Nome = new JTextField();
-		panel_Cliente.add(textField_Nome);
-		textField_Nome.setColumns(20);
+		textField = new JTextField();
+		panel_Cliente.add(textField);
+		textField.setColumns(14);
 		
 		JPanel panel_Email = new JPanel();
 		panel_Email.setMaximumSize(new Dimension(32767, 30));
@@ -141,10 +150,60 @@ public class TelaCliente extends JFrame {
 		textField_Email = new JTextField();
 		textField_Email.setPreferredSize(new Dimension(10, 20));
 		panel_Email.add(textField_Email);
-		textField_Email.setColumns(20);
+		textField_Email.setColumns(14);
 		
-		JPanel panel_Crud = new JPanel();
+		Component rigidArea_4 = Box.createRigidArea(new Dimension(20, 20));
+		dados_Cliente.add(rigidArea_4);
+		
+		panel_Crud = new JPanel();
+		panel_Crud.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		panel_Crud.setMaximumSize(new Dimension(380, 100));
+		panel_Crud.setPreferredSize(new Dimension(300, 300));
 		dados_Cliente.add(panel_Crud);
+		panel_Crud.setLayout(new BoxLayout(panel_Crud, BoxLayout.Y_AXIS));
+		
+		JPanel panelButtons1 = new JPanel();
+		panelButtons1.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		panelButtons1.setMaximumSize(new Dimension(380, 45));
+		panel_Crud.add(panelButtons1);
+		FlowLayout fl_panelButtons1 = new FlowLayout(FlowLayout.LEFT, 10, 10);
+		panelButtons1.setLayout(fl_panelButtons1);
+		
+		JButton saveButton = new JButton("Salvar");
+		saveButton.setMaximumSize(new Dimension(50, 23));
+		saveButton.setHorizontalTextPosition(SwingConstants.LEADING);
+		saveButton.setPreferredSize(new Dimension(80, 30));
+		panelButtons1.add(saveButton);
+		
+		JButton updateButton = new JButton("Atualizar");
+		updateButton.setMaximumSize(new Dimension(80, 23));
+		updateButton.setPreferredSize(new Dimension(80, 30));
+		panelButtons1.add(updateButton);
+		
+		JButton deleteButton = new JButton("Deletar");
+		deleteButton.setPreferredSize(new Dimension(80, 30));
+		panelButtons1.add(deleteButton);
+		
+		JButton cleanButton = new JButton("Limpar");
+		cleanButton.setPreferredSize(new Dimension(80, 30));
+		panelButtons1.add(cleanButton);
+		panelButtons1.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{deleteButton, cleanButton, saveButton, updateButton}));
+		
+		JPanel panelButtons2 = new JPanel();
+		panelButtons2.setBorder(new EmptyBorder(0, 10, 0, 0));
+		panelButtons2.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		panelButtons2.setMaximumSize(new Dimension(380, 50));
+		panel_Crud.add(panelButtons2);
+		panelButtons2.setLayout(new BoxLayout(panelButtons2, BoxLayout.X_AXIS));
+		
+		JButton listButton = new JButton("Listar");
+		listButton.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		listButton.setMaximumSize(new Dimension(160, 30));
+		listButton.setPreferredSize(new Dimension(160, 30));
+		panelButtons2.add(listButton);
+		
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1);
 	}
 
 
