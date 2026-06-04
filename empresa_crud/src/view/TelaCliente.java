@@ -28,6 +28,12 @@ import java.awt.ComponentOrientation;
 import java.awt.Rectangle;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class TelaCliente extends JFrame {
 
@@ -36,6 +42,8 @@ public class TelaCliente extends JFrame {
 	private JTextField textField_Email;
 	private JTextField textField;
 	private JPanel panel_Crud;
+	private JTable tableClientes;
+	private DefaultTableModel model;
 
 	/**
 	 * Launch the application.
@@ -73,12 +81,12 @@ public class TelaCliente extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		panel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		panel.setPreferredSize(new Dimension(150, 30));
+		panel.setPreferredSize(new Dimension(800, 30));
 		panel.setBorder(new EmptyBorder(7, 0, 0, 0));
 		frame.getContentPane().add(panel);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		JPanel dados_Cliente = new JPanel();
 		dados_Cliente.setMaximumSize(new Dimension(660, 130));
@@ -152,21 +160,18 @@ public class TelaCliente extends JFrame {
 		panel_Email.add(textField_Email);
 		textField_Email.setColumns(14);
 		
-		Component rigidArea_4 = Box.createRigidArea(new Dimension(20, 20));
-		dados_Cliente.add(rigidArea_4);
-		
 		panel_Crud = new JPanel();
 		panel_Crud.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		panel_Crud.setMaximumSize(new Dimension(380, 100));
+		panel_Crud.setMaximumSize(new Dimension(470, 100));
 		panel_Crud.setPreferredSize(new Dimension(300, 300));
 		dados_Cliente.add(panel_Crud);
 		panel_Crud.setLayout(new BoxLayout(panel_Crud, BoxLayout.Y_AXIS));
 		
 		JPanel panelButtons1 = new JPanel();
 		panelButtons1.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		panelButtons1.setMaximumSize(new Dimension(380, 45));
+		panelButtons1.setMaximumSize(new Dimension(470, 45));
 		panel_Crud.add(panelButtons1);
-		FlowLayout fl_panelButtons1 = new FlowLayout(FlowLayout.LEFT, 10, 10);
+		FlowLayout fl_panelButtons1 = new FlowLayout(FlowLayout.LEFT, 20, 10);
 		panelButtons1.setLayout(fl_panelButtons1);
 		
 		JButton saveButton = new JButton("Salvar");
@@ -176,6 +181,11 @@ public class TelaCliente extends JFrame {
 		panelButtons1.add(saveButton);
 		
 		JButton updateButton = new JButton("Atualizar");
+		updateButton.setMargin(new Insets(2, 5, 2, 5));
+		updateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		updateButton.setMaximumSize(new Dimension(80, 23));
 		updateButton.setPreferredSize(new Dimension(80, 30));
 		panelButtons1.add(updateButton);
@@ -202,8 +212,37 @@ public class TelaCliente extends JFrame {
 		listButton.setPreferredSize(new Dimension(160, 30));
 		panelButtons2.add(listButton);
 		
-		JPanel panel_1 = new JPanel();
-		panel.add(panel_1);
+		JPanel panelList = new JPanel();
+		panelList.setBorder(new CompoundBorder(new TitledBorder(null, "Lista de Clientes", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)), new EmptyBorder(6, 6, 6, 6)));
+		panelList.setMaximumSize(new Dimension(660, 400));
+		panelList.setPreferredSize(new Dimension(400, 400));
+		panel.add(panelList);
+		panelList.setLayout(new BoxLayout(panelList, BoxLayout.X_AXIS));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panelList.add(scrollPane);
+		
+		tableClientes = new JTable();
+		scrollPane.setViewportView(tableClientes);
+		tableClientes.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "NOME", "EMAIL"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, true, true
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		
+		DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
+		
+		
+		tableClientes.setMaximumSize(new Dimension(700, 470));
 	}
 
 
