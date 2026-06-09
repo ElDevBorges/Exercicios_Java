@@ -174,7 +174,7 @@ public class TelaLogin extends JFrame {
 					SwingUtilities.invokeLater(() -> {
 						if (sucesso) {
 							JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
-							tl.setVisible(true);
+							tl.frame.setVisible(true);
 							
 						} else JOptionPane.showMessageDialog(null, "Usuário ou senha incorreto");
 					});

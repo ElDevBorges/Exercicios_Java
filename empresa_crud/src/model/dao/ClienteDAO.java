@@ -55,12 +55,12 @@ public class ClienteDAO {
                         
                         
                     }
-                    return lista;
                     
         } catch (SQLException e) {
         	System.out.println(e.getMessage());
-            return lista;
+            
         }
+        return lista;
 
     }
 

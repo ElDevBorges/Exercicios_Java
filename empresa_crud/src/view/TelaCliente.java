@@ -24,13 +24,20 @@ import javax.swing.JTextField;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import java.awt.ComponentOrientation;
 import java.awt.Rectangle;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+import controller.ClientController;
+import model.entity.Cliente;
+
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
@@ -40,10 +47,12 @@ public class TelaCliente extends JFrame {
 	JFrame frame;
 	private JTextField textField_Id;
 	private JTextField textField_Email;
-	private JTextField textField;
+	private JTextField textFieldNome;
 	private JPanel panel_Crud;
 	private JTable tableClientes;
 	private DefaultTableModel model;
+	private ClientController clientController = new ClientController();
+	
 
 	/**
 	 * Launch the application.
@@ -71,6 +80,9 @@ public class TelaCliente extends JFrame {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	
+	
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setPreferredSize(new Dimension(700, 450));
@@ -138,9 +150,9 @@ public class TelaCliente extends JFrame {
 		rigidArea_1.setMaximumSize(new Dimension(19, 20));
 		panel_Cliente.add(rigidArea_1);
 		
-		textField = new JTextField();
-		panel_Cliente.add(textField);
-		textField.setColumns(14);
+		textFieldNome = new JTextField();
+		panel_Cliente.add(textFieldNome);
+		textFieldNome.setColumns(14);
 		
 		JPanel panel_Email = new JPanel();
 		panel_Email.setMaximumSize(new Dimension(32767, 30));
@@ -175,6 +187,14 @@ public class TelaCliente extends JFrame {
 		panelButtons1.setLayout(fl_panelButtons1);
 		
 		JButton saveButton = new JButton("Salvar");
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Thread (() -> {
+					clientController.inserirCliente();
+					
+				}).start();
+			}
+		});
 		saveButton.setMaximumSize(new Dimension(50, 23));
 		saveButton.setHorizontalTextPosition(SwingConstants.LEADING);
 		saveButton.setPreferredSize(new Dimension(80, 30));
@@ -207,6 +227,19 @@ public class TelaCliente extends JFrame {
 		panelButtons2.setLayout(new BoxLayout(panelButtons2, BoxLayout.X_AXIS));
 		
 		JButton listButton = new JButton("Listar");
+		listButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				new Thread (() -> {
+					clientController.listarCliente();
+
+					
+					
+				}).start();
+				
+			}
+		});
 		listButton.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		listButton.setMaximumSize(new Dimension(160, 30));
 		listButton.setPreferredSize(new Dimension(160, 30));
@@ -243,6 +276,30 @@ public class TelaCliente extends JFrame {
 		
 		
 		tableClientes.setMaximumSize(new Dimension(700, 470));
+	}
+
+	public JTextField getTextFieldNome() {
+		return textFieldNome;
+	}
+
+	public void setTextFieldNome(JTextField textFieldNome) {
+		this.textFieldNome = textFieldNome;
+	}
+
+	public JTextField getTextField_Id() {
+		return textField_Id;
+	}
+
+	public void setTextField_Id(JTextField textField_Id) {
+		this.textField_Id = textField_Id;
+	}
+
+	public JTextField getTextField_Email() {
+		return textField_Email;
+	}
+
+	public void setTextField_Email(JTextField textField_Email) {
+		this.textField_Email = textField_Email;
 	}
 
 
