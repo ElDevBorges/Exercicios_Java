@@ -46,13 +46,12 @@ public class TelaCliente extends JFrame {
 
 	JFrame frame;
 	private JTextField textField_Id;
-	private JTextField textField_Email;
+	private JTextField textFieldEmail;
 	private JTextField textFieldNome;
 	private JPanel panel_Crud;
 	private JTable tableClientes;
 	private DefaultTableModel model;
-	private ClientController clientController = new ClientController();
-	
+	private ClientController clientController;
 
 	/**
 	 * Launch the application.
@@ -167,10 +166,10 @@ public class TelaCliente extends JFrame {
 		rigidArea_2.setMaximumSize(new Dimension(21, 20));
 		panel_Email.add(rigidArea_2);
 		
-		textField_Email = new JTextField();
-		textField_Email.setPreferredSize(new Dimension(10, 20));
-		panel_Email.add(textField_Email);
-		textField_Email.setColumns(14);
+		textFieldEmail = new JTextField();
+		textFieldEmail.setPreferredSize(new Dimension(10, 20));
+		panel_Email.add(textFieldEmail);
+		textFieldEmail.setColumns(14);
 		
 		panel_Crud = new JPanel();
 		panel_Crud.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -185,16 +184,19 @@ public class TelaCliente extends JFrame {
 		panel_Crud.add(panelButtons1);
 		FlowLayout fl_panelButtons1 = new FlowLayout(FlowLayout.LEFT, 20, 10);
 		panelButtons1.setLayout(fl_panelButtons1);
+		clientController = new ClientController();
 		
 		JButton saveButton = new JButton("Salvar");
-		saveButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new Thread (() -> {
-					clientController.inserirCliente();
+		saveButton.addActionListener(e -> {
 					
-				}).start();
-			}
-		});
+			        var nome = getTextFieldNome().getText();
+			        var email = getTextFieldEmail().getText();
+					clientController.inserirCliente(nome, email);
+					
+					clientController.limparCampo();
+					
+			});
+			
 		saveButton.setMaximumSize(new Dimension(50, 23));
 		saveButton.setHorizontalTextPosition(SwingConstants.LEADING);
 		saveButton.setPreferredSize(new Dimension(80, 30));
@@ -232,11 +234,32 @@ public class TelaCliente extends JFrame {
 				
 				
 				new Thread (() -> {
-					clientController.listarCliente();
+					try {
+					List <Cliente> lista = clientController.listarCliente();
+					
+					SwingUtilities.invokeLater(() -> {
+						String [] colunas = {"ID", "Nome", "E-mail"};
+						DefaultTableModel modelo = new DefaultTableModel (colunas, 0);
+						
+						for (Cliente c : lista) {
+							Object[] linha = {
+							c.getId(),
+							c.getNome(),
+							c.getEmail()
+						
+						};
+							modelo.addRow(linha);
+						}
+						tableClientes.setModel(modelo);
+						
+						
+					});
+					
+					} catch (Exception e1) {
+						e1.printStackTrace();
+						}
 
-					
-					
-				}).start();
+					}).start();
 				
 			}
 		});
@@ -257,23 +280,6 @@ public class TelaCliente extends JFrame {
 		
 		tableClientes = new JTable();
 		scrollPane.setViewportView(tableClientes);
-		tableClientes.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"ID", "NOME", "EMAIL"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, true, true
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		
-		DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
-		
 		
 		tableClientes.setMaximumSize(new Dimension(700, 470));
 	}
@@ -294,12 +300,12 @@ public class TelaCliente extends JFrame {
 		this.textField_Id = textField_Id;
 	}
 
-	public JTextField getTextField_Email() {
-		return textField_Email;
+	public JTextField getTextFieldEmail() {
+		return textFieldEmail;
 	}
 
-	public void setTextField_Email(JTextField textField_Email) {
-		this.textField_Email = textField_Email;
+	public void setTextField_Email(JTextField textFieldEmail) {
+		this.textFieldEmail = textFieldEmail;
 	}
 
 

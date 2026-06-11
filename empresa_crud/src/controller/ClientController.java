@@ -12,31 +12,43 @@ public class ClientController {
     private ClienteDAO clienteDAO;
     private TelaCliente telaCliente;
     
-
+    public ClientController (TelaCliente telaCliente, ClienteDAO clienteDAO) {
+    	this.telaCliente = telaCliente;
+    	this.clienteDAO = clienteDAO;
+    }
+    
     public ClientController() {
-		super();
-		this.telaCliente = telaCliente;
-	}
+    	
+    }
+    
 
-
-    public void inserirCliente () {
+    public void inserirCliente (String nome, String email) {
         Cliente cliente = new Cliente();
-        cliente.setNome(telaCliente.getTextFieldNome().getText());
-        cliente.setEmail(telaCliente.getTextField_Email().getText());
+        telaCliente = new TelaCliente();
+
+      
+        clienteDAO = new ClienteDAO();
+        cliente.setNome(nome);
+        cliente.setEmail(email);
         
         clienteDAO.inserir(cliente);
-        JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!");
+        JOptionPane.showMessageDialog(telaCliente, "Cliente inserido com sucesso!");
     }
 
-    public ClientController(TelaCliente telaCliente) {
-		super();
-		this.telaCliente = telaCliente;
-	}
+
 
 
 	public List<Cliente> listarCliente () {
+		clienteDAO = new ClienteDAO();
         return clienteDAO.listar();
     }
+	
+	public void limparCampo () {
+		telaCliente.getTextField_Id().setText("");
+		telaCliente.getTextFieldNome().setText("");
+		telaCliente.getTextFieldEmail().setText("");
+		System.out.print("rodou limpar campo");
+	}
 
     public void atualizarCliente (String nome, String email, int id) {
         Cliente cliente = new Cliente(nome, email, id);
