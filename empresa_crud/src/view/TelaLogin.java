@@ -1,20 +1,13 @@
 package view;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
 
 import controller.LoginController;
 import model.entity.Usuario;
@@ -25,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.Box;
 import java.awt.FlowLayout;
@@ -38,177 +32,193 @@ public class TelaLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JLabel lblNewLabel_2;
-	private Component rigidArea;
-	private JPanel panel;
-	private JPanel panel_1;
-	private JLabel senhaTextLabel;
-	private Component rigidArea_1;
-	private JPanel panel_2;
-	private JLabel usuarioTextLabel;
 	private JTextField usuarioTextField;
-	private Component rigidArea_2;
 	private JPasswordField senhaTextField;
 	private JCheckBox chckbxNewCheckBox;
-	private JPanel panel_3;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JPanel panel_4;
-	private Component rigidArea_3;
-	private JPanel mainPanel;
-	private Component rigidArea_4;
-	private JLabel lblNewLabel_3;
+	private JButton btnEntrar;
+	private JButton btnSair;
 	private LoginController loginController = new LoginController();
 	private String usuarioText;
 	private String senhaText;
 	static TelaCliente tl = new TelaCliente();
 	char [] senhaArray;
 
-	/**
-	 * Launch the application.
-	 */
-
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaLogin() {
+		setTitle("Login - Gerenciador de Clientes");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(200, 150, 480, 380);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(20, 0, 0, 0));
+		contentPane.setBackground(new Color(240, 240, 245));
+		contentPane.setBorder(new EmptyBorder(30, 30, 30, 30));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		
-		lblNewLabel_2 = new JLabel("Acesso ao Sistema");
-		lblNewLabel_2.setAlignmentX(0.5f);
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 16));
-		contentPane.add(lblNewLabel_2);
+		JLabel lblTitulo = new JLabel("Acesso ao Sistema");
+		lblTitulo.setAlignmentX(Component.LEFT_ALIGNMENT);
+		lblTitulo.setHorizontalAlignment(SwingConstants.LEFT);
+		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 24));
+		lblTitulo.setForeground(new Color(0, 51, 102));
+		contentPane.add(lblTitulo);
 		
-		rigidArea = Box.createRigidArea(new Dimension(0, 30));
-		contentPane.add(rigidArea);
+		contentPane.add(Box.createRigidArea(new Dimension(0, 30)));
 		
+		JPanel panel_Usuario = new JPanel();
+		panel_Usuario.setLayout(new BoxLayout(panel_Usuario, BoxLayout.Y_AXIS));
+		panel_Usuario.setBackground(new Color(240, 240, 245));
+		panel_Usuario.setMaximumSize(new Dimension(300, 65));
+		panel_Usuario.setAlignmentX(Component.LEFT_ALIGNMENT);
+		contentPane.add(panel_Usuario);
 		
-		mainPanel = new JPanel();
-		mainPanel.setBorder(new EmptyBorder(0, 20, 0, 20));
-		contentPane.add(mainPanel);
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		JLabel usuarioTextLabel = new JLabel("Usuário:");
+		usuarioTextLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		usuarioTextLabel.setForeground(new Color(0, 0, 0));
+		usuarioTextLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panel_Usuario.add(usuarioTextLabel);
 		
-		
-		panel = new JPanel();
-		panel.setMaximumSize(new Dimension(32767, 85));
-		mainPanel.add(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		
-		panel_2 = new JPanel();
-		panel_2.setMaximumSize(new Dimension(32767, 30));
-		panel_2.setPreferredSize(new Dimension(10, 40));
-		panel.add(panel_2);
-		panel_2.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		
-		usuarioTextLabel = new JLabel("Usuário");
-		panel_2.add(usuarioTextLabel);
-		
-		rigidArea_2 = Box.createRigidArea(new Dimension(30, 20));
-		panel_2.add(rigidArea_2);
+		panel_Usuario.add(Box.createRigidArea(new Dimension(0, 5)));
 		
 		usuarioTextField = new JTextField();
-		usuarioTextField.setPreferredSize(new Dimension(300, 20));
-		panel_2.add(usuarioTextField);
+		usuarioTextField.setPreferredSize(new Dimension(300, 35));
+		usuarioTextField.setMaximumSize(new Dimension(300, 35));
+		usuarioTextField.setMinimumSize(new Dimension(300, 35));
+		usuarioTextField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		usuarioTextField.setColumns(20);
+		usuarioTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
+		usuarioTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(180, 180, 180), 1));
+		panel_Usuario.add(usuarioTextField);
 		
-		panel_1 = new JPanel();
-		panel_1.setPreferredSize(new Dimension(250, 30));
+		contentPane.add(Box.createRigidArea(new Dimension(0, 15)));
 		
-		panel.add(panel_1);
-		panel_1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		panel_1.setMaximumSize(new Dimension(32767, 30));
+		JPanel panel_Senha = new JPanel();
+		panel_Senha.setLayout(new BoxLayout(panel_Senha, BoxLayout.Y_AXIS));
+		panel_Senha.setBackground(new Color(240, 240, 245));
+		panel_Senha.setMaximumSize(new Dimension(300, 65));
+		panel_Senha.setAlignmentX(Component.LEFT_ALIGNMENT);
+		contentPane.add(panel_Senha);
 		
-		senhaTextLabel = new JLabel("Senha");
-		panel_1.add(senhaTextLabel);
+		JLabel senhaTextLabel = new JLabel("Senha:");
+		senhaTextLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		senhaTextLabel.setForeground(new Color(0, 0, 0));
+		senhaTextLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panel_Senha.add(senhaTextLabel);
 		
-		rigidArea_1 = Box.createRigidArea(new Dimension(30, 20));
-		rigidArea_1.setPreferredSize(new Dimension(37, 20));
-		panel_1.add(rigidArea_1);
+		panel_Senha.add(Box.createRigidArea(new Dimension(0, 5)));
 		
 		senhaTextField = new JPasswordField();
-		senhaTextField.setPreferredSize(new Dimension(300, 20));
+		senhaTextField.setPreferredSize(new Dimension(300, 35));
+		senhaTextField.setMaximumSize(new Dimension(300, 35));
+		senhaTextField.setMinimumSize(new Dimension(300, 35));
+		senhaTextField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		senhaTextField.setColumns(20);
-		senhaTextField.setMaximumSize(new Dimension(300, 2147483647));
-		panel_1.add(senhaTextField);
+		senhaTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
+		senhaTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(180, 180, 180), 1));
+		panel_Senha.add(senhaTextField);
+		
+		contentPane.add(Box.createRigidArea(new Dimension(0, 12)));
+		
+		JPanel panel_Checkbox = new JPanel();
+		panel_Checkbox.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 5));
+		panel_Checkbox.setBackground(new Color(240, 240, 245));
+		panel_Checkbox.setMaximumSize(new Dimension(300, 30));
+		panel_Checkbox.setAlignmentX(Component.LEFT_ALIGNMENT);
+		contentPane.add(panel_Checkbox);
 		
 		chckbxNewCheckBox = new JCheckBox("Mostrar senha");
-		chckbxNewCheckBox.setMaximumSize(new Dimension(230, 23));
-		chckbxNewCheckBox.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		chckbxNewCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panel.add(chckbxNewCheckBox);
-		
-		rigidArea_4 = Box.createRigidArea(new Dimension(20, 20));
-		rigidArea_4.setMaximumSize(new Dimension(20, 13));
-		rigidArea_4.setMinimumSize(new Dimension(20, 0));
-		rigidArea_4.setPreferredSize(new Dimension(20, 13));
-		mainPanel.add(rigidArea_4);
-		
-		panel_3 = new JPanel();
-		panel_3.setMaximumSize(new Dimension(200, 40));
-		panel_3.setPreferredSize(new Dimension(200, 10));
-		mainPanel.add(panel_3);
-		FlowLayout fl_panel_3 = new FlowLayout(FlowLayout.LEFT, 15, 5);
-		panel_3.setLayout(fl_panel_3);
-		
-		btnNewButton = new JButton("Entrar");
-		btnNewButton.addActionListener(new ActionListener() {
-	
+		chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		chckbxNewCheckBox.setBackground(new Color(240, 240, 245));
+		chckbxNewCheckBox.setFocusPainted(false);
+		chckbxNewCheckBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				usuarioText = usuarioTextField.getText();
+				if (chckbxNewCheckBox.isSelected()) {
+					senhaTextField.setEchoChar((char) 0);
+				} else {
+					senhaTextField.setEchoChar('●');
+				}
+			}
+		});
+		panel_Checkbox.add(chckbxNewCheckBox);
+		
+		contentPane.add(Box.createRigidArea(new Dimension(0, 20)));
+		
+		JPanel panel_Botoes = new JPanel();
+		panel_Botoes.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+		panel_Botoes.setBackground(new Color(240, 240, 245));
+		panel_Botoes.setMaximumSize(new Dimension(300, 50));
+		panel_Botoes.setAlignmentX(Component.LEFT_ALIGNMENT);
+		contentPane.add(panel_Botoes);
+		
+		btnEntrar = new JButton("Entrar");
+		btnEntrar.setPreferredSize(new Dimension(120, 40));
+		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnEntrar.setBackground(new Color(34, 139, 34));
+		btnEntrar.setForeground(Color.WHITE);
+		btnEntrar.setOpaque(true);
+		btnEntrar.setBorderPainted(false);
+		btnEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+		btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				usuarioText = usuarioTextField.getText().trim();
+				
+				if (usuarioText.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Digite o usuário!", "Aviso", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
 				
 				senhaArray = senhaTextField.getPassword();
-				senhaText =  new String (senhaArray);
+				senhaText = new String (senhaArray);
 				
+				if (senhaText.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Digite a senha!", "Aviso", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
 				
 				new Thread (() -> {
 					boolean sucesso =  loginController.autenticarLogin(usuarioText, senhaText);
 					
 					SwingUtilities.invokeLater(() -> {
 						if (sucesso) {
-							JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
+							JOptionPane.showMessageDialog(null, "Login realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 							tl.frame.setVisible(true);
-							
-						} else JOptionPane.showMessageDialog(null, "Usuário ou senha incorreto");
+							TelaLogin.this.dispose();
+						
+						} else JOptionPane.showMessageDialog(null, "Usuário ou senha incorreto!", "Erro", JOptionPane.ERROR_MESSAGE);
 					});
 					
-					
 				}).start();
-				
 			}
 		});
-		btnNewButton.setMargin(new Insets(2, 7, 2, 7));
-		btnNewButton.setPreferredSize(new Dimension(63, 28));
-		btnNewButton.setMaximumSize(new Dimension(63, 28));
-		panel_3.add(btnNewButton);
+		panel_Botoes.add(btnEntrar);
 		
-		btnNewButton_1 = new JButton("Sair");
-		btnNewButton_1.setPreferredSize(new Dimension(63, 28));
-		btnNewButton_1.setMaximumSize(new Dimension(63, 23));
-		panel_3.add(btnNewButton_1);
+		btnSair = new JButton("Sair");
+		btnSair.setPreferredSize(new Dimension(120, 40));
+		btnSair.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnSair.setBackground(new Color(220, 20, 60));
+		btnSair.setForeground(Color.WHITE);
+		btnSair.setOpaque(true);
+		btnSair.setBorderPainted(false);
+		btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		panel_Botoes.add(btnSair);
 		
-		rigidArea_3 = Box.createRigidArea(new Dimension(20, 20));
-		rigidArea_3.setMaximumSize(new Dimension(30, 40));
-		rigidArea_3.setPreferredSize(new Dimension(20, 15));
-		contentPane.add(rigidArea_3);
+		contentPane.add(Box.createVerticalGlue());
 		
-		panel_4 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel_4.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
-		panel_4.setMaximumSize(new Dimension(32767, 20));
-		contentPane.add(panel_4);
+		JPanel panel_Rodape = new JPanel();
+		panel_Rodape.setLayout(new FlowLayout(FlowLayout.LEFT));
+		panel_Rodape.setBackground(new Color(240, 240, 245));
+		panel_Rodape.setMaximumSize(new Dimension(420, 30));
+		panel_Rodape.setAlignmentX(Component.LEFT_ALIGNMENT);
+		contentPane.add(panel_Rodape);
 		
-		lblNewLabel_3 = new JLabel("Digite seu usuário e senha para entrar no sistema");
-		panel_4.add(lblNewLabel_3);
+		JLabel lblRodape = new JLabel("Digite seu usuário e senha para entrar no sistema");
+		lblRodape.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblRodape.setForeground(new Color(100, 100, 100));
+		panel_Rodape.add(lblRodape);
 		
-		
-
+		setLocationRelativeTo(null);
 	}
 }

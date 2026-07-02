@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class ConexaoBD {
     private static final String URL = "jdbc:mysql://localhost:3306/empresa";
-    private static final String USER = "root";
-    private static final String PASSWORD = "Lf19092019f-";
+    private static final String USER = "empresa_user";
+    private static final String PASSWORD = "159753";
 
     public static Connection getConnection() {
         try {

@@ -1,6 +1,5 @@
 package model.dao;
 
-import com.mysql.cj.protocol.Resultset;
 import connection.ConexaoBD;
 import model.entity.Cliente;
 
